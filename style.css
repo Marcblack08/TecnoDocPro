@@ -10,12 +10,137 @@ body {
     color: #333;
 }
 
+/* --- UTILIDADES IMPORTANTES --- */
+.oculto {
+    display: none !important;
+}
+
+/* --- ESTILOS DEL LOGIN Y REGISTRO --- */
+.contenedor-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #1a252f;
+}
+
+.caja-login {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 400px;
+}
+
+.caja-login h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.caja-login p {
+    text-align: center;
+    color: #7f8c8d;
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+}
+
+.grupo-input {
+    margin-bottom: 20px;
+}
+
+.grupo-input label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.grupo-input input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.btn-login {
+    width: 100%;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-login:hover {
+    background-color: #2980b9;
+}
+
+.btn-google {
+    width: 100%;
+    background-color: white;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    transition: 0.3s;
+}
+
+.btn-google:hover {
+    background-color: #f8f9fa;
+}
+
+.btn-google img {
+    width: 20px;
+}
+
+.divisor {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.divisor::before,
+.divisor::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+}
+
+.divisor span {
+    padding: 0 10px;
+}
+
+.error {
+    color: #e74c3c;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* --- ESTILOS DEL DASHBOARD --- */
 .contenedor-principal {
     display: flex;
     height: 100vh;
 }
 
-/* --- BARRA LATERAL --- */
 .sidebar {
     width: 260px;
     background-color: #1a252f;
@@ -61,6 +186,22 @@ body {
     border-left: 4px solid #3498db;
 }
 
+.btn-salir {
+    background: transparent;
+    border: none;
+    color: #e74c3c;
+    text-align: left;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+.btn-salir:hover {
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
 .perfil-usuario {
     padding: 20px;
     border-top: 1px solid #2c3e50;
@@ -72,7 +213,6 @@ body {
     font-size: 0.8rem;
 }
 
-/* --- CONTENIDO PRINCIPAL --- */
 .contenido {
     flex-grow: 1;
     padding: 30px;
@@ -113,53 +253,4 @@ header {
     font-weight: bold;
     color: #2c3e50;
     margin-top: 10px;
-}
-
-/* --- BOTÓN DE GOOGLE --- */
-.btn-google {
-    width: 100%;
-    background-color: white;
-    color: #333;
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-    transition: background-color 0.3s, box-shadow 0.3s;
-}
-
-.btn-google:hover {
-    background-color: #f8f9fa;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.btn-google img {
-    width: 20px;
-}
-
-/* --- DIVISOR "O USA TU CORREO" --- */
-.divisor {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 20px;
-    color: #7f8c8d;
-    font-size: 0.9rem;
-}
-
-.divisor::before,
-.divisor::after {
-    content: '';
-    flex: 1;
-    border-bottom: 1px solid #ddd;
-}
-
-.divisor span {
-    padding: 0 10px;
 }

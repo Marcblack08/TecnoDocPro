@@ -265,3 +265,41 @@ body {
 .action-buttons {
     margin-top: 12px;
 }
+
+/* =========================================
+   ESTILOS DEDICADOS A INFORMES TÉCNICOS
+   ========================================= */
+.form-textarea {
+    min-height: 80px;
+    resize: vertical;
+    font-family: inherit;
+    line-height: 1.4;
+}
+
+.evidence-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.btn-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: rgba(37, 99, 235, 0.1);
+    border: 1px dashed var(--primary-blue);
+    color: var(--text-light);
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 13px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.3s ease;
+}
+
+.btn-upload:active {
+    background: rgba(37, 99, 235, 0.25);
+}
+

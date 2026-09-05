@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoPro - Panel Principal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-layout">
+        <!-- BARRA SUPERIOR -->
+        <header class="top-bar">
+            <div class="brand">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span>TecnoPro</span>
+            </div>
+            <div class="user-badge">
+                <span class="avatar">M</span>
+            </div>
+        </header>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="dashboard-content">
+            <section class="welcome-header">
+                <h2>Bienvenido, Marc 👋</h2>
+                <p>Resumen de actividad técnica</p>
+            </section>
+
+            <!-- TARJETAS DE MÉTRICAS -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <span class="label">Proformas</span>
+                    <span class="value">7 <small>/ 10</small></span>
+                </div>
+                <div class="metric-card">
+                    <span class="label">Informes</span>
+                    <span class="value">4 <small>/ 10</small></span>
+                </div>
+                <div class="metric-card">
+                    <span class="label">Clientes</span>
+                    <span class="value">32</span>
+                </div>
+                <div class="metric-card">
+                    <span class="label">Almacén</span>
+                    <span class="value">185</span>
+                </div>
+            </div>
+
+            <!-- ACCIONES RÁPIDAS -->
+            <section class="quick-actions">
+                <h3>Acciones rápidas</h3>
+                <div class="actions-grid">
+                    <button class="btn-action" onclick="window.location.href='proformas.html'">+ Nueva Proforma</button>
+                    <button class="btn-action" onclick="window.location.href='informes.html'">+ Nuevo Informe</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- NAVEGACIÓN INFERIOR MÓVIL -->
+        <nav class="bottom-nav">
+            <a href="dashboard.html" class="nav-item active">🏠 <span>Inicio</span></a>
+            <a href="proformas.html" class="nav-item">📄 <span>Proformas</span></a>
+            <a href="informes.html" class="nav-item">📝 <span>Informes</span></a>
+            <a href="#" class="nav-item">📦 <span>Almacén</span></a>
+            <a href="#" class="nav-item">👥 <span>Clientes</span></a>
+        </nav>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

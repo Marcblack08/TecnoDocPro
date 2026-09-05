@@ -108,3 +108,14 @@ function calcularTotales() {
     if (document.getElementById('resIgv')) document.getElementById('resIgv').textContent = `S/ ${igv.toFixed(2)}`;
     if (document.getElementById('resTotal')) document.getElementById('resTotal').textContent = `S/ ${total.toFixed(2)}`;
 }
+// Activar alternancia de ver/ocultar contraseña
+const togglePasswordBtn = document.getElementById('togglePassword');
+const passwordInput = document.getElementById('password');
+
+if (togglePasswordBtn && passwordInput) {
+    togglePasswordBtn.addEventListener('click', () => {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        togglePasswordBtn.style.color = type === 'text' ? '#3b82f6' : '#94a3b8';
+    });
+}

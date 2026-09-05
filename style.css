@@ -1,0 +1,151 @@
+/* =========================================
+   VARIABLES DE COLOR (Dark Mode & Azul)
+   ========================================= */
+:root {
+    --bg-dark: #0b0f19;          /* Fondo muy oscuro casi negro */
+    --glass-bg: rgba(255, 255, 255, 0.03); /* Fondo transparente para el cristal */
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --primary-blue: #2563eb;     /* Azul tecnológico */
+    --primary-hover: #1d4ed8;
+    --text-light: #f8fafc;       /* Texto blanco suave */
+    --text-muted: #94a3b8;       /* Texto gris secundario */
+}
+
+/* =========================================
+   RESETEO BÁSICO
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* Un ligero resplandor azul en el fondo para que el cristal resalte */
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(37, 99, 235, 0.05) 0px, transparent 50%);
+}
+
+/* =========================================
+   CONTENEDOR PRINCIPAL (MOBILE-FIRST)
+   ========================================= */
+.login-container {
+    width: 100%;
+    padding: 20px; /* Margen seguro para pantallas de celular */
+    display: flex;
+    justify-content: center;
+}
+
+/* LA TARJETA EFECTO CRISTAL (GLASSMORPHISM) */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px); /* Soporte para iPhone */
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 40px 24px;
+    width: 100%;
+    max-width: 400px; /* En PC no crecerá más de 400px, en celular ocupará el 100% */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+/* =========================================
+   ELEMENTOS DE LA INTERFAZ
+   ========================================= */
+.logo-section {
+    margin-bottom: 30px;
+}
+
+.logo-section svg {
+    margin-bottom: 12px;
+}
+
+.logo-section h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+}
+
+.logo-section p {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+/* FORMULARIO */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    margin-left: 4px;
+}
+
+.input-group input {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--glass-border);
+    color: var(--text-light);
+    padding: 14px 16px; /* Altura grande para que sea fácil de tocar con el dedo */
+    border-radius: 12px;
+    font-size: 16px; /* 16px evita que los iPhones hagan zoom automático */
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: var(--primary-blue);
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* BOTÓN */
+.btn-primary {
+    width: 100%;
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-primary:active {
+    transform: scale(0.98); /* Pequeño efecto al tocar el botón en el celular */
+}
+
+/* PIE DEL FORMULARIO */
+.form-footer {
+    margin-top: 24px;
+}
+
+.form-footer a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.form-footer a:hover {
+    text-decoration: underline;
+}

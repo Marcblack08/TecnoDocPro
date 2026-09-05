@@ -1,100 +1,110 @@
 /* ==========================================================================
-   TECNOPRO - Lógica Principal (JavaScript)
+   TECNOPRO - Sistema Multirrubro & Control de Planes
    ========================================================================== */
 
-// Base de datos local simulada (se mantendrá mientras navegas)
-const DB = {
-    usuario: "Marc",
-    creditosProformas: 7,
-    creditosInformes: 4,
-    limiteCreditos: 10,
-    clientes: [
-        { id: 1, nombre: "Condominio Los Álamos", ruc: "20601234567", telefono: "987654321", email: "admin@losalamos.com" },
-        { id: 2, nombre: "Taller Autos Express", ruc: "10456789012", telefono: "912345678", email: "contacto@autosexpress.pe" }
-    ],
-    productosAlmacen: [
-        { id: 101, marca: "Hikvision", producto: "Cámara IP 4MP", modelo: "DS-2CD2T47G2", precio: 380, stock: 12 },
-        { id: 102, marca: "Western Digital", producto: "Disco Duro Purple 4TB", modelo: "WD40PURZ", precio: 520, stock: 5 },
-        { id: 103, marca: "Generico", producto: "Instalación / Configuración", modelo: "Servicio", precio: 80, stock: 999 }
-    ]
+// Configuración Global de la Cuenta
+const CONFIG_USUARIO = {
+    nombre: "Marc",
+    plan: "FREE", // Opciones: 'FREE' o 'PREMIUM'
+    limiteFree: 10
 };
 
-// Se ejecuta automáticamente cuando el HTML termina de cargar
+// Datos Simulados
+const DB = {
+    proformasCreadas: 7,
+    informesCreados: 4,
+    clientesTotales: 32,
+    almacenTotales: 185
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     initLogin();
+    renderDashboard();
     initProformas();
 });
 
-/* ==========================================================================
-   1. AUTENTICACIÓN Y NAVEGACIÓN
-   ========================================================================== */
+/* --- 1. AUTENTICACIÓN --- */
 function initLogin() {
     const loginForm = document.getElementById('loginForm');
-
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Detener recarga de página
-
+            e.preventDefault();
             const emailInput = document.getElementById('email').value;
-            
-            // Guardamos el email para mantener la sesión activa de forma simple
-            localStorage.setItem('tecnopro_user', emailInput || 'Marc');
-
-            // Redirigir al panel principal
-            window.location.href = 'dashboard.html';
+            localStorage.setItem('tecnopro_user', emailInput || CONFIG_USUARIO.nombre);
+            window.location.href = './dashboard.html';
         });
     }
 }
 
-/* ==========================================================================
-   2. CÁLCULO AUTOMÁTICO DE PROFORMAS
-   ========================================================================== */
-function initProformas() {
-    const tablaProforma = document.getElementById('proformaTabla');
-    
-    if (!tablaProforma) return; // Si no estamos en la vista de proforma, no hace nada
+/* --- 2. RENDERIZADO DEL DASHBOARD Y LÍMITES --- */
+function renderDashboard() {
+    const elProformas = document.getElementById('valProformas');
+    const elInformes = document.getElementById('valInformes');
+    const badgePlan = document.getElementById('badgePlan');
 
-    // Escuchar cambios en las cantidades o precios para recalcular totales automáticamente
-    tablaProforma.addEventListener('input', calcularTotalesProforma);
+    if (!elProformas || !elInformes) return;
+
+    // Actualizar Badge del Plan
+    if (badgePlan) {
+        badgePlan.textContent = CONFIG_USUARIO.plan;
+        if (CONFIG_USUARIO.plan === 'PREMIUM') {
+            badgePlan.classList.add('premium');
+        }
+    }
+
+    // Renderizar según el Plan
+    if (CONFIG_USUARIO.plan === 'PREMIUM') {
+        elProformas.innerHTML = `${DB.proformasCreadas} <small>/ ∞</small>`;
+        elInformes.innerHTML = `${DB.informesCreados} <small>/ ∞</small>`;
+    } else {
+        elProformas.innerHTML = `${DB.proformasCreadas} <small>/ ${CONFIG_USUARIO.limiteFree}</small>`;
+        elInformes.innerHTML = `${DB.informesCreados} <small>/ ${CONFIG_USUARIO.limiteFree}</small>`;
+    }
 }
 
-function calcularTotalesProforma() {
+/* --- 3. VALIDACIÓN AL CREAR DOCUMENTOS --- */
+function validarAcceso(tipo) {
+    if (CONFIG_USUARIO.plan === 'PREMIUM') {
+        window.location.href = `./${tipo}.html`;
+        return;
+    }
+
+    const cantidadActual = tipo === 'proformas' ? DB.proformasCreadas : DB.informesCreados;
+
+    if (cantidadActual >= CONFIG_USUARIO.limiteFree) {
+        alert(`Has alcanzado el límite de ${CONFIG_USUARIO.limiteFree} ${tipo} del Plan Gratuito. Pásate a Premium para crear documentos ilimitados.`);
+    } else {
+        window.location.href = `./${tipo}.html`;
+    }
+}
+
+/* --- 4. CÁLCULO DE PROFORMAS --- */
+function initProformas() {
+    const tabla = document.getElementById('proformaTabla');
+    if (!tabla) return;
+
+    tabla.addEventListener('input', calcularTotales);
+}
+
+function calcularTotales() {
     const filas = document.querySelectorAll('#proformaTabla tbody tr');
     let subtotal = 0;
 
     filas.forEach(fila => {
-        const cantidadInput = fila.querySelector('.cant-input');
-        const precioInput = fila.querySelector('.precio-input');
-        const totalCelda = fila.querySelector('.total-celda');
-
-        if (cantidadInput && precioInput && totalCelda) {
-            const cant = parseFloat(cantidadInput.value) || 0;
-            const precio = parseFloat(precioInput.value) || 0;
-            const totalFila = cant * precio;
-
-            totalCelda.textContent = `S/ ${totalFila.toFixed(2)}`;
-            subtotal += totalFila;
-        }
+        const cant = parseFloat(fila.querySelector('.cant-input')?.value) || 0;
+        const precio = parseFloat(fila.querySelector('.precio-input')?.value) || 0;
+        const totalFila = cant * precio;
+        
+        const celdaTotal = fila.querySelector('.total-celda');
+        if (celdaTotal) celdaTotal.textContent = `S/ ${totalFila.toFixed(2)}`;
+        
+        subtotal += totalFila;
     });
 
-    // Cálculos globales (IGV 18% en Perú)
     const igv = subtotal * 0.18;
-    const totalGeneral = subtotal + igv;
+    const total = subtotal + igv;
 
-    // Actualizar elementos en pantalla si existen
-    const elSubtotal = document.getElementById('resSubtotal');
-    const elIgv = document.getElementById('resIgv');
-    const elTotal = document.getElementById('resTotal');
-
-    if (elSubtotal) elSubtotal.textContent = `S/ ${subtotal.toFixed(2)}`;
-    if (elIgv) elIgv.textContent = `S/ ${igv.toFixed(2)}`;
-    if (elTotal) elTotal.textContent = `S/ ${totalGeneral.toFixed(2)}`;
+    if (document.getElementById('resSubtotal')) document.getElementById('resSubtotal').textContent = `S/ ${subtotal.toFixed(2)}`;
+    if (document.getElementById('resIgv')) document.getElementById('resIgv').textContent = `S/ ${igv.toFixed(2)}`;
+    if (document.getElementById('resTotal')) document.getElementById('resTotal').textContent = `S/ ${total.toFixed(2)}`;
 }
-
-/* ==========================================================================
-   3. FUNCIONES AUXILIARES (Para botones rápidos)
-   ========================================================================== */
-function irA(pagina) {
-    window.location.href = pagina;
-        }
-                                         

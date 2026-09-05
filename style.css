@@ -439,3 +439,20 @@ select.form-input {
         grid-template-columns: repeat(4, 1fr);
     }
 }
+.badge-plan {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--glass-border);
+    color: var(--text-muted);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+}
+
+/* Estilo cuando pasa a Premium */
+.badge-plan.premium {
+    background: rgba(234, 179, 8, 0.15);
+    border-color: #eab308;
+    color: #fde047; /* Amarillo dorado */
+}

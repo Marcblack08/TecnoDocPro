@@ -1,163 +1,152 @@
-/* =========================================
-   VARIABLES DE COLOR (Dark Mode & Azul)
-   ========================================= */
+/* ==========================================================================
+   1. VARIABLES DE COLOR Y DISEÑO
+   ========================================================================== */
 :root {
-    --bg-dark: #0b0f19;          /* Fondo muy oscuro casi negro */
-    --glass-bg: rgba(255, 255, 255, 0.03); /* Fondo transparente para el cristal */
+    --bg-dark: #0b0f19;          /* Fondo base oscuro */
+    --glass-bg: rgba(255, 255, 255, 0.04); /* Cristal más limpio */
     --glass-border: rgba(255, 255, 255, 0.08);
-    --primary-blue: #2563eb;     /* Azul tecnológico */
-    --primary-hover: #1d4ed8;
-    --text-light: #f8fafc;       /* Texto blanco suave */
-    --text-muted: #94a3b8;       /* Texto gris secundario */
+    --primary-blue: #3b82f6;     /* Azul vibrante y moderno */
+    --primary-hover: #2563eb;
+    --text-light: #f8fafc;       /* Blanco suave para lectura */
+    --text-muted: #94a3b8;       /* Gris para datos secundarios */
+    --success: #10b981;          /* Verde para totales */
 }
 
-/* =========================================
-   RESETEO BÁSICO
-   ========================================= */
+/* ==========================================================================
+   2. RESETEO Y FONDO GENERAL
+   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: system-ui, -apple-system, sans-serif;
+    -webkit-tap-highlight-color: transparent; /* Quita el parpadeo azul en móviles al tocar */
 }
 
 body {
     background-color: var(--bg-dark);
     color: var(--text-light);
+    min-height: 100vh;
+    /* Resplandor azul en el fondo para dar volumen */
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.05) 0px, transparent 50%);
+    background-attachment: fixed;
+}
+
+/* ==========================================================================
+   3. ESTRUCTURAS PRINCIPALES (LAYOUTS)
+   ========================================================================== */
+/* Layout del Login (Centrado) */
+.login-container {
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    /* Un ligero resplandor azul en el fondo para que el cristal resalte */
-    background-image: 
-        radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.15) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(37, 99, 235, 0.05) 0px, transparent 50%);
 }
 
-/* =========================================
-   CONTENEDOR PRINCIPAL (MOBILE-FIRST)
-   ========================================= */
-.login-container {
+/* Layout de la App (Dashboard, Proformas, Informes) */
+.app-layout {
     width: 100%;
-    padding: 20px; /* Margen seguro para pantallas de celular */
+    max-width: 1000px;
+    margin: 0 auto;
+    min-height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    padding-bottom: 80px; /* Espacio para que la nav inferior no tape contenido */
 }
 
-/* LA TARJETA EFECTO CRISTAL (GLASSMORPHISM) */
+.dashboard-content {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+/* ==========================================================================
+   4. NAVEGACIÓN Y HEADER
+   ========================================================================== */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: rgba(11, 15, 25, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--glass-border);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.avatar {
+    background: var(--primary-blue);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+}
+
+/* Barra inferior móvil */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 65px;
+    background: rgba(11, 15, 25, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid var(--glass-border);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 100;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 11px;
+    gap: 4px;
+    transition: color 0.3s;
+}
+
+.nav-item.active, .nav-item:hover {
+    color: var(--primary-blue);
+}
+
+/* ==========================================================================
+   5. TARJETAS (CARDS) EFECTO CRISTAL
+   ========================================================================== */
 .glass-card {
     background: var(--glass-bg);
     backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px); /* Soporte para iPhone */
+    -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
     border-radius: 24px;
     padding: 40px 24px;
     width: 100%;
-    max-width: 400px; /* En PC no crecerá más de 400px, en celular ocupará el 100% */
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     text-align: center;
-}
-
-/* =========================================
-   ELEMENTOS DE LA INTERFAZ
-   ========================================= */
-.logo-section {
-    margin-bottom: 30px;
-}
-
-.logo-section svg {
-    margin-bottom: 12px;
-}
-
-.logo-section h1 {
-    font-size: 28px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    margin-bottom: 4px;
-}
-
-.logo-section p {
-    color: var(--text-muted);
-    font-size: 14px;
-}
-
-/* FORMULARIO */
-.input-group {
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.input-group label {
-    display: block;
-    font-size: 13px;
-    color: var(--text-muted);
-    margin-bottom: 8px;
-    margin-left: 4px;
-}
-
-.input-group input {
-    width: 100%;
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid var(--glass-border);
-    color: var(--text-light);
-    padding: 14px 16px; /* Altura grande para que sea fácil de tocar con el dedo */
-    border-radius: 12px;
-    font-size: 16px; /* 16px evita que los iPhones hagan zoom automático */
-    outline: none;
-    transition: all 0.3s ease;
-}
-
-.input-group input:focus {
-    border-color: var(--primary-blue);
-    background: rgba(0, 0, 0, 0.4);
-}
-
-/* BOTÓN */
-.btn-primary {
-    width: 100%;
-    background-color: var(--primary-blue);
-    color: white;
-    border: none;
-    padding: 16px;
-    border-radius: 12px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 10px;
-}
-
-.btn-primary:hover {
-    background-color: var(--primary-hover);
-}
-
-.btn-primary:active {
-    transform: scale(0.98); /* Pequeño efecto al tocar el botón en el celular */
-}
-
-/* PIE DEL FORMULARIO */
-.form-footer {
-    margin-top: 24px;
-}
-
-.form-footer a {
-    color: var(--primary-blue);
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.form-footer a:hover {
-    text-decoration: underline;
-}
-
-/* =========================================
-   ESTILOS DE FORMULARIO Y TABLAS (PROFORMAS)
-   ========================================= */
-.btn-back {
-    color: var(--text-light);
-    text-decoration: none;
-    font-size: 20px;
-    margin-right: 8px;
 }
 
 .section-card {
@@ -181,37 +170,199 @@ body {
     margin-bottom: 12px;
 }
 
-.form-input {
+/* ==========================================================================
+   6. ESTILOS DEL DASHBOARD (PANEL PRINCIPAL)
+   ========================================================================== */
+.welcome-header {
+    margin-bottom: 24px;
+}
+
+.welcome-header h2 {
+    font-size: 24px;
+    margin-bottom: 4px;
+}
+
+.welcome-header p {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.metric-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: transform 0.2s ease;
+}
+
+.metric-card:active {
+    transform: scale(0.97);
+}
+
+.metric-card .label {
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.metric-card .value {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.metric-card .value small {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.quick-actions h3 {
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.actions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* ==========================================================================
+   7. FORMULARIOS, INPUTS Y BOTONES
+   ========================================================================== */
+.logo-section { margin-bottom: 30px; }
+.logo-section h1 { font-size: 28px; font-weight: 700; margin-bottom: 4px; }
+.logo-section p { color: var(--text-muted); font-size: 14px; }
+
+.input-group {
+    margin-bottom: 16px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    margin-left: 4px;
+}
+
+/* Inputs generales */
+.input-group input, 
+.form-input, 
+.form-textarea {
     width: 100%;
     background: rgba(0, 0, 0, 0.3);
     border: 1px solid var(--glass-border);
     color: var(--text-light);
-    padding: 10px 12px;
-    border-radius: 8px;
-    font-size: 14px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    font-size: 16px; /* Evita zoom en iOS */
     outline: none;
+    transition: all 0.3s ease;
 }
 
-.form-input:focus {
+.input-group input:focus, 
+.form-input:focus, 
+.form-textarea:focus {
     border-color: var(--primary-blue);
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }
 
-/* TABLA ADAPTABLE PARA MÓVIL */
+.form-textarea {
+    min-height: 100px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+/* Selectores y Botones */
+select.form-input {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2394a3b8%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px top 50%;
+    background-size: 10px auto;
+}
+
+.btn-primary, .btn-action {
+    width: 100%;
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-action {
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid var(--primary-blue);
+}
+
+.btn-primary:hover, .btn-action:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-primary:active, .btn-action:active {
+    transform: scale(0.98);
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid var(--primary-blue);
+    color: var(--primary-blue);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-back {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 22px;
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.form-footer { margin-top: 24px; }
+.form-footer a { color: var(--primary-blue); text-decoration: none; font-size: 14px; }
+.form-footer a:hover { text-decoration: underline; }
+
+/* ==========================================================================
+   8. TABLAS (PROFORMAS)
+   ========================================================================== */
 .table-responsive {
     overflow-x: auto;
+    border-radius: 8px;
 }
 
 .proforma-table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 480px; /* Permite scroll horizontal cómodo en móviles pequeños */
+    min-width: 500px; 
 }
 
 .proforma-table th {
     text-align: left;
     font-size: 12px;
     color: var(--text-muted);
-    padding-bottom: 8px;
+    padding: 10px 8px;
     border-bottom: 1px solid var(--glass-border);
 }
 
@@ -224,23 +375,16 @@ body {
     font-size: 14px;
     color: var(--primary-blue);
     white-space: nowrap;
+    padding-left: 8px !important;
 }
 
-.btn-secondary {
-    background: transparent;
-    border: 1px solid var(--primary-blue);
-    color: var(--primary-blue);
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-size: 12px;
-    cursor: pointer;
-}
-
-/* RESUMEN DE TOTALES */
+/* ==========================================================================
+   9. RESUMEN DE TOTALES Y EVIDENCIAS
+   ========================================================================== */
 .resume-card {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
 }
 
 .resume-line {
@@ -254,26 +398,12 @@ body {
     font-size: 18px;
     color: var(--text-light);
     border-top: 1px solid var(--glass-border);
-    padding-top: 8px;
+    padding-top: 12px;
     margin-top: 4px;
 }
 
 .total-line strong {
-    color: #10b981; /* Verde éxito */
-}
-
-.action-buttons {
-    margin-top: 12px;
-}
-
-/* =========================================
-   ESTILOS DEDICADOS A INFORMES TÉCNICOS
-   ========================================= */
-.form-textarea {
-    min-height: 80px;
-    resize: vertical;
-    font-family: inherit;
-    line-height: 1.4;
+    color: var(--success);
 }
 
 .evidence-grid {
@@ -287,19 +417,25 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    background: rgba(37, 99, 235, 0.1);
+    gap: 8px;
+    background: rgba(59, 130, 246, 0.05);
     border: 1px dashed var(--primary-blue);
     color: var(--text-light);
-    padding: 16px;
+    padding: 20px;
     border-radius: 12px;
-    font-size: 13px;
+    font-size: 14px;
     cursor: pointer;
-    text-align: center;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .btn-upload:active {
-    background: rgba(37, 99, 235, 0.25);
+    background: rgba(59, 130, 246, 0.2);
+    transform: scale(0.98);
 }
 
+/* Media Queries para PC */
+@media (min-width: 768px) {
+    .metrics-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

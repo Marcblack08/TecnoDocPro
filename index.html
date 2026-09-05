@@ -3,87 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="TecnoPro - Gestión inteligente de proformas, informes y servicios técnicos.">
-    <meta name="theme-color" content="#080c14">
-    <title>TecnoPro | Iniciar sesión</title>
-    <link rel="stylesheet" href="./style.css">
+    <title>TecnoDoc Pro - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <main class="login-container" aria-labelledby="login-title">
-        <section class="glass-card" aria-label="Inicio de sesión de TecnoPro">
-
-            <!-- LOGO Y TÍTULO -->
-            <div class="logo-section">
-                <div class="app-logo" aria-hidden="true">
-                    <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                        <path d="M9 12l2 2 4-4"></path>
-                    </svg>
-                </div>
-                <h1 id="login-title">TecnoPro</h1>
-                <p>Gestión técnica inteligente</p>
+    <div class="contenedor-principal">
+        <!-- Barra Lateral -->
+        <aside class="sidebar">
+            <div class="marca">
+                <h2>🏢 <span id="ui-nombre-empresa">Cargando...</span></h2>
+                <p class="etiqueta-plan" id="ui-plan-empresa">Plan...</p>
             </div>
+            
+            <nav class="menu">
+                <a href="#" class="activo">📊 Panel de Control</a>
+                <a href="#">👥 Clientes</a>
+                <a href="#">🧾 Proformas</a>
+                <a href="#">📋 Informes Técnicos</a>
+                <a href="#">📦 Almacén</a>
+            </nav>
 
-            <!-- MENSAJE DE ERROR/ALERTA -->
-            <div id="loginMessage" class="alert" role="alert" aria-live="polite" hidden></div>
-
-            <!-- FORMULARIO DE ACCESO -->
-            <form id="loginForm" novalidate>
-                
-                <!-- CORREO -->
-                <div class="input-group">
-                    <label for="email">Correo electrónico</label>
-                    <input type="email" id="email" name="email" autocomplete="email" inputmode="email" placeholder="correo@empresa.com" required>
-                </div>
-
-                <!-- CONTRASEÑA CON BOTÓN MOSTRAR/OCULTAR -->
-                <div class="input-group">
-                    <label for="password">Contraseña</label>
-                    <div class="password-wrapper" style="position: relative;">
-                        <input type="password" id="password" name="password" autocomplete="current-password" placeholder="Ingresa tu contraseña" required style="padding-right: 50px;">
-                        
-                        <button type="button" id="togglePassword" aria-label="Mostrar contraseña" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: transparent; border: none; color: #94a3b8; cursor: pointer; padding: 8px;">
-                            <svg id="eyeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path>
-                                <circle cx="12" cy="12" r="3"></circle>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- OPCIONES -->
-                <div class="login-options" style="display: flex; justify-content: space-between; align-items: center; margin: 12px 0 20px; font-size: 13px;">
-                    <label style="display: flex; align-items: center; gap: 8px; color: #94a3b8; cursor: pointer;">
-                        <input type="checkbox" id="remember" name="remember" style="accent-color: #3b82f6;">
-                        Recordarme
-                    </label>
-                    <a href="#" onclick="alert('Función de recuperación en desarrollo')" style="color: #60a5fa; text-decoration: none;">¿Olvidaste tu contraseña?</a>
-                </div>
-
-                <!-- BOTÓN PRINCIPAL -->
-                <button type="submit" id="loginButton" class="btn-primary">
-                    <span id="loginButtonText">INICIAR SESIÓN</span>
-                </button>
-            </form>
-
-            <!-- PIE DE FORMULARIO -->
-            <div class="form-footer" style="margin-top: 20px; font-size: 14px;">
-                <p>¿Aún no tienes una cuenta? <a href="#" onclick="alert('Registro en desarrollo')" style="color: #3b82f6; text-decoration: none; font-weight: 600;">Crear cuenta</a></p>
+            <div class="perfil-usuario">
+                <p>👤 <strong id="ui-nombre-usuario">Cargando...</strong></p>
+                <p class="rol" id="ui-rol-usuario">Rol...</p>
             </div>
+        </aside>
 
-            <!-- SEGURIDAD -->
-            <div class="login-security" style="margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; gap: 6px; color: #64748b; font-size: 12px;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="3" y="11" width="18" height="10" rx="2"></rect>
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                </svg>
-                Acceso protegido
-            </div>
+        <!-- Contenido Principal -->
+        <main class="contenido">
+            <header>
+                <h1>Resumen General</h1>
+                <button class="btn-nuevo">+ Nuevo Documento</button>
+            </header>
 
-        </section>
-    </main>
+            <section class="tarjetas-metricas">
+                <div class="tarjeta">
+                    <h3>Proformas Disponibles</h3>
+                    <p class="numero" id="ui-creditos-proformas">0</p>
+                </div>
+                <div class="tarjeta">
+                    <h3>Informes Disponibles</h3>
+                    <p class="numero" id="ui-creditos-informes">0</p>
+                </div>
+            </section>
+        </main>
+    </div>
 
-    <script src="./script.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

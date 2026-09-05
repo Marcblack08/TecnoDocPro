@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoPro - Informe Técnico</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-layout">
+        <!-- BARRA SUPERIOR -->
+        <header class="top-bar">
+            <div class="brand">
+                <a href="dashboard.html" class="btn-back">←</a>
+                <span>Nuevo Informe Técnico</span>
+            </div>
+            <div class="user-badge">
+                <span class="avatar">M</span>
+            </div>
+        </header>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="dashboard-content">
+            
+            <!-- DATOS GENERALES -->
+            <section class="section-card">
+                <h3>Datos del Servicio</h3>
+                
+                <div class="input-group">
+                    <label for="infCliente">Cliente</label>
+                    <select id="infCliente" class="form-input">
+                        <option value="">-- Seleccionar Cliente --</option>
+                        <option value="1">Condominio Los Álamos</option>
+                        <option value="2">Taller Autos Express</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="infFecha">Fecha de Inspección</label>
+                    <input type="date" id="infFecha" class="form-input" value="2026-09-05">
+                </div>
+
+                <div class="input-group">
+                    <label for="infTecnico">Técnico Responsable</label>
+                    <input type="text" id="infTecnico" class="form-input" value="Marc Joachin" readonly>
+                </div>
+            </section>
+
+            <!-- CAPTURA DE EVIDENCIAS -->
+            <section class="section-card">
+                <h3>Evidencias de Campo</h3>
+                
+                <div class="evidence-grid">
+                    <label class="btn-upload">
+                        📷 <span>Subir Fotos</span>
+                        <input type="file" accept="image/*" multiple style="display: none;">
+                    </label>
+
+                    <button class="btn-upload" type="button" onclick="alert('Función de grabación activada')">
+                        🎤 <span>Grabar Audio</span>
+                    </button>
+                </div>
+
+                <div class="input-group" style="margin-top: 12px;">
+                    <label for="infObservaciones">Observación Inicial / Nota rápida</label>
+                    <textarea id="infObservaciones" class="form-input form-textarea" placeholder="Ej: Cámara ubicada en sector 4 presenta pérdida intermitente de señal..."></textarea>
+                </div>
+            </section>
+
+            <!-- DIAGNÓSTICO Y TRABAJO REALIZADO -->
+            <section class="section-card">
+                <h3>Detalle Técnico</h3>
+
+                <div class="input-group">
+                    <label for="infDiagnostico">Diagnóstico</label>
+                    <textarea id="infDiagnostico" class="form-input form-textarea" placeholder="Se identificó interrupción intermitente de comunicación entre el equipo y el switch..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="infTrabajo">Trabajo Realizado</label>
+                    <textarea id="infTrabajo" class="form-input form-textarea" placeholder="Se realizó revisión física, prueba de continuidad, reemplazo de conector RJ45..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="infRecomendaciones">Recomendaciones</label>
+                    <textarea id="infRecomendaciones" class="form-input form-textarea" placeholder="Se recomienda reemplazar tramo de cableado debido a deterioro ambiental..."></textarea>
+                </div>
+            </section>
+
+            <!-- BOTONES DE ACCIÓN -->
+            <section class="section-card resume-card">
+                <button class="btn-primary" onclick="alert('Informe técnico guardado')">Guardar e Imprimir PDF</button>
+            </section>
+
+        </main>
+
+        <!-- NAVEGACIÓN INFERIOR MÓVIL -->
+        <nav class="bottom-nav">
+            <a href="dashboard.html" class="nav-item">🏠 <span>Inicio</span></a>
+            <a href="proformas.html" class="nav-item">📄 <span>Proformas</span></a>
+            <a href="informes.html" class="nav-item active">📝 <span>Informes</span></a>
+            <a href="#" class="nav-item">📦 <span>Almacén</span></a>
+            <a href="#" class="nav-item">👥 <span>Clientes</span></a>
+        </nav>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
